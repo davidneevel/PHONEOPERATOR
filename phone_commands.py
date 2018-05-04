@@ -144,6 +144,65 @@ def unlock():
     tap()
     sleep(1)  # phone opens
     
+def press(value):
+    move(value)
+    lightTap()
+
+def text_mike():
+    move(xy.app(0,6))
+    lightTap()
+    movexy(2200,5850)   # text field
+    tap()
+    press(xy.m)
+    press(xy.i)
+    press(xy.k)
+    press(xy.e)
+    movexy(2200,5950)
+    lightTap()
+    movexy(2200, 3050)
+    sleep(1)
+    tap()
+    press(xy.h)
+    press(xy.e)
+    press(xy.y)
+    press(xy.space)
+    press(xy.m)
+    press(xy.i)
+    press(xy.k)
+    press(xy.e)
+    press(xy.space)
+    press(xy.w)
+    press(xy.h)
+    press(xy.a)
+    press(xy.t)
+    press(xy.numbers)
+    press(xy.m)       # apostrophe is near the m key
+    press(xy.s)
+    press(xy.space)
+    press(xy.u)
+    press(xy.p)
+    press(xy.numbers)
+    press(xy.v)   # question mark
+    movexy(3150,4400) # send button
+    sleep(1)
+    tap()
+    move(xy.homeButton)
+    sleep(5)
+    tap()
+    zero()
+
+
+def respond_to_text():
+    move(2100,5400)
+    tap()
+    move(2100, 3050)
+    sleep(1)
+    press(xy.n)
+    press(xy.i)
+    press(xy.c)
+    press(xy.e)
+
+
     
 def twitter():
     move(xy.app(3,2))  # twitter app

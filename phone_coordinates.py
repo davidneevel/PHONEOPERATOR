@@ -64,12 +64,13 @@ np9 = (npCol3, npRow3)
 
 #   KEYBOARD
 
-kbRow0 = 3850
+kbRow0 = 3850 # top row
 kbRow1 = 3500
 kbRow2 = 3100
-kbRow3 = 2700
+kbRow3 = 2700 # bottom of phone
 
 space = (2100, kbRow3)
+numbers = (1200, kbRow3)
 a = (1200, kbRow1)
 b = (2400, kbRow2)
 c = (1850, kbRow2)
@@ -88,7 +89,7 @@ o = (3000, kbRow0)
 p = (3100, kbRow0)
 q = (1100, kbRow0)
 r = (1800, kbRow0)
-s = (1400, kbRow1)
+s = (1400, kbRow2)
 t = (2000, kbRow0)
 u = (2500, kbRow0)
 v = (2100, kbRow2)
@@ -96,4 +97,5 @@ w = (1300, kbRow0)
 x = (1700, kbRow2)
 y = (2200, kbRow0)
 z = (1400, kbRow2)
+
 period = 0

@@ -28,6 +28,10 @@ while a < 20:
     lfh.lookForHearts()
     a += 1
 
+
+# # text mike
+# pc.text_mike()
+
 pc.zero()
 
 

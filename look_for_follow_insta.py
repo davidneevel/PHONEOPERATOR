@@ -15,7 +15,7 @@ def followBack():
     camH = 960
 
     #Get the picture (low resolution, so it should be quite fast)
-    #Here you can also specify other parameters (e.g.:rotate the image)
+    #Here you can also specify other parameters (e.g.:rotate the image) 
     with picamera.PiCamera() as camera:
         camera.resolution = (camW,camH)   #   4:3 1280:960 also works
         camera.capture(stream, format='jpeg')

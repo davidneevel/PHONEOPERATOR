@@ -71,8 +71,10 @@ void setup() {
   //  STEPPER SHIT
   vstepper.setMaxSpeed(7000);
   vstepper.setAcceleration(8000);
+  vstepper.setPinsInverted(1,0,0);  // 1 inverts, 0 doesn't. (direction, step, enable)
   hstepper.setMaxSpeed(5000);
   hstepper.setAcceleration(8000);
+  
 
   servo.attach(3);
   onOffServo.attach(5);
@@ -341,17 +343,27 @@ void zeroBottom(){
   mode = 2;              //moving
   digitalWrite(venPin, LOW);
   lowerLimitVar = digitalRead(lowerLimitPin);
-  digitalWrite(vdirPin, LOW);
+  if(lowerLimitVar == 0){                     // if it's already sitting on the switch, move off and resettle on it
+    digitalWrite(vdirPin, LOW);
+    for(int i = 0; i < 200; i ++){
+      digitalWrite(vstepPin, HIGH);
+      delayMicroseconds(300);
+      digitalWrite(vstepPin, LOW);
+      delayMicroseconds(300);
+    }
+  }
+  lowerLimitVar = digitalRead(lowerLimitPin);  //recheck the switch. it should have moved from closed to open.
+  digitalWrite(vdirPin, HIGH);
   while(lowerLimitVar != 0){
     lowerLimitVar = digitalRead(lowerLimitPin);
     digitalWrite(vstepPin, HIGH);
-    delayMicroseconds(300);
+    delayMicroseconds(350);
     digitalWrite(vstepPin, LOW);
-    delayMicroseconds(300);
+    delayMicroseconds(350);
     counting += 1;
   }
 
-  Serial.print("it is "); Serial.print(counting); Serial.println(" steps from top to bottom");
+  
   vstepper.setCurrentPosition(0);
   digitalWrite(venPin, HIGH);
   Serial.println("found lower limit");
@@ -365,14 +377,24 @@ void zeroLeft(){
   mode = 2;           //moving
   digitalWrite(henPin, LOW);
   leftLimitVar = digitalRead(leftLimitPin);
+  if(leftLimitVar == 0){
+    digitalWrite(hdirPin, HIGH);
+    for(int i = 0; i < 150; i++){
+      digitalWrite(hstepPin, HIGH);
+      delayMicroseconds(300);
+      digitalWrite(hstepPin, LOW);
+      delayMicroseconds(300);
+    }
+  }
+  leftLimitVar = digitalRead(leftLimitPin);
   Serial.println("zeroing left");
     digitalWrite(hdirPin, LOW);
     while(leftLimitVar != 0){
       leftLimitVar = digitalRead(leftLimitPin);
-    digitalWrite(hstepPin, HIGH);
-    delayMicroseconds(300);
-    digitalWrite(hstepPin, LOW);
-    delayMicroseconds(300);
+      digitalWrite(hstepPin, HIGH);
+      delayMicroseconds(300);
+      digitalWrite(hstepPin, LOW);
+      delayMicroseconds(300);
   }
   digitalWrite(henPin, HIGH);
     hstepper.setCurrentPosition(0);
