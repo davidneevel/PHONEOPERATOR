@@ -10,10 +10,10 @@ from time import sleep
 def lookForHearts():
     #Create a memory stream so photos doesn't need to be saved in a file
     stream = io.BytesIO()
-
+    
     camW = 1280
     camH = 960
-
+    
     #Get the picture (low resolution, so it should be quite fast)
     #Here you can also specify other parameters (e.g.:rotate the image)
     with picamera.PiCamera() as camera:
@@ -57,10 +57,14 @@ def lookForHearts():
             print "heartX, heartY = (%d, %d)" % (heartX, heartY) 
             toY = mapValues.myMap(heartY)
             print "toY = %d" % toY
-            pc.movexy(1150,toY)
+            pc.movexy(900,toY)
             pc.lightTap()
             pc.checkStatus()
             return(toY)
+            
+    
+    else:
+        print "no hearts found"
             
             
 
@@ -87,5 +91,6 @@ heartY 824 = y 3500
 '''
 
 if __name__ == "__main__":
+    pc.zero()               #put the zeros in here so it doesn't zero while scrolling
     lookForHearts()
     pc.zero()

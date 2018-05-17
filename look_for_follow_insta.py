@@ -35,7 +35,7 @@ def followBack():
     cv2.rectangle(image,(roiX,roiY),(roiXMax,roiYMax),(255,255,255),2) # rect around roi
 
 
-    #Load a cascade file for detecting faces
+    #Load a cascade file for detecting follow button
     heart_cascade = cv2.CascadeClassifier('camera/follow_button_cascade_level_9.xml')
 
     #Convert to grayscale
@@ -79,7 +79,7 @@ def followBack():
                 print "heartW, heartH = (%d, %d)" % (w, h)
                 toY = mapValues.myMap(heartY)
                 print "toY = %d" % toY
-                pc.movexy(2950,toY)
+                pc.movexy(2650,toY)
                 sleep(1)
                 pc.lightTap()
                 pc.checkStatus()

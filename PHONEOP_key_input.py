@@ -1,6 +1,7 @@
 import smbus
 import time
 from time import sleep
+import phone_coordinates
 # for RPI version 1, use "bus = smbus.SMBus(0)"
 bus = smbus.SMBus(1)
 
@@ -12,6 +13,9 @@ servoTap = 5
 servoTo = 6
 zero = 7
 xy = 8
+
+xVar = 0
+yVar = 0
 
 
 # This is the address we setup in the Arduino Program
@@ -63,6 +67,8 @@ def servo(value):
 def zero():
     checkStatus()
     bus.write_i2c_block_data(ard1, 7,[0,0,0,0])
+    xVar = 0
+    yVar = 0
 
 def tap():
     checkStatus()
@@ -80,14 +86,19 @@ while True:
         print "int"
            
         if mode == 'y':
+            yVar = a
             print "moving y to %d" % a
+            print "                          %d, %d" %(xVar, yVar)
             prompt = "move y to: "
             y(a)
+            
         if mode == 'x':
+            xVar = a
             print "moving x to %d" % a
+            print "                          %d, %d" %(xVar, yVar)
             prompt = "move x to: "
             x(a)
-
+            
         if mode == 's':
             print "moving servo to %d" % a
             prompt = "move servo to: "
@@ -110,6 +121,11 @@ while True:
         if (var == 'z'):
             print 'zeroing'
             zero()
+        if(var == 'h'):
+            print 'home button'
+            x(phone_coordinates.homeButton[0])
+            y(phone_coordinates.homeButton[1])
+            
 
     
 

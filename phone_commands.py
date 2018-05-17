@@ -101,7 +101,7 @@ def lightTap():
     bus.write_i2c_block_data(ard1, servoLightTap, [0,0,0,0])
     checkStatus()
 
-def onOff():
+def onOff():     # hits side power button once
     print "onOff"
     checkStatus()
     bus.write_i2c_block_data(ard1, onOffCmd, [0,0,0,0])
@@ -113,7 +113,7 @@ def scrollUp():
     sleep(.25)
     servo(xy.servoDownSuperLight)
     sleep(.1)
-    movexy(2100,5500)
+    move(xy.np2)
     servo(xy.servoUp)
     # move(xy.np0)
     checkStatus()
@@ -122,6 +122,11 @@ def getOutTheWay():
     checkStatus()
     move(xy.homeButton)
     checkStatus()
+
+def homeButton():
+    move(xy.homeButton)
+    tap()
+
 
 def unlock():
     zero()
@@ -202,6 +207,38 @@ def respond_to_text():
     press(xy.c)
     press(xy.e)
 
+def type(a):
+    length = len(a)
+    for i in range(0,length):
+        letter = a[i]
+        if letter == ' ':
+            move(xy.space)
+        elif letter == '1':
+            move(xy.one)
+        elif letter == '2':
+            move(xy.two)
+        elif letter == '3':
+            move(xy.three)
+        elif letter == '4':
+            move(xy.four)
+        elif letter == '5':
+            move(xy.five)
+        elif letter == '6':
+            move(xy.six)   
+        elif letter == '7':
+            move(xy.seven)
+        elif letter == '8':
+            move(xy.eight)
+        elif letter == '9':
+            move(xy.nine)
+        elif letter == '0':
+            move(xy.zero)
+        
+        else:
+            varname = 'xy.' + letter
+            target = eval(varname)
+            move(target)
+        lightTap()
 
     
 def twitter():
@@ -296,44 +333,44 @@ def twitter():
 
 
 
-def insta():
+def insta_selfie():
 
-    movexy(2350,5950)  # instagram app
+    move(xy.app(2,1))  # instagram app
     tap()
 
-    movexy(2100,2800)  # make post button
-    tap()
-    sleep(1)
-    movexy(1150,4400)  # selfie cam button
+    movexy(1950,2700)  # make post button
     tap()
     sleep(1)
+    movexy(950,4150)  # selfie cam button
+    tap()
+    sleep(1)
 
 
-    movexy(2100, 3600) # take picture
+    movexy(1950, 3450) # take picture
     tap()
     sleep(1.5)
 
-    movexy(3050, 6650)  # next button
+    movexy(2800, 6450)  # next button
     sleep(.25)
     tap()
 
-    movexy(2100, 6300)  # enter text
+    movexy(2100, 6100)  # enter text
     tap()
     sleep(1)
 
-    movexy(3100,3500) # L
+    move(xy.l) # L
     lightTap()
     sleep(.25)
 
-    movexy(2950,3900) # O
+    move(xy.o) # O
     lightTap()
     sleep(.25)
 
-    movexy(3100,3500) # L
+    move(xy.l) # L
     lightTap()
     sleep(.25)
 
-    movexy(3050,6650) # OK
+    movexy(2800, 6450) # OK
     sleep(.25)
     slowTap()
 
@@ -341,14 +378,9 @@ def insta():
 
     slowTap()  #  POST
 
-    movexy(2100,2400) # home button
+    move(xy.homeButton) # home button
     sleep(5)
-    movexy(2100,4300)
-    tap()
-    sleep(.15)
-    tap()
-    movexy(2100,2400)  #home button
-    sleep(1)
+
     tap()
 
     sleep(2)
@@ -359,5 +391,17 @@ def insta():
     zero()
 
 
+def off():
+    zero()
+    onOff()
 
+def open_insta_followers():
+    
+    move(xy.app(2,1))
+    tap()
+    movexy(2850, 2700)
+    tap()
+    movexy(2200, 6100)
+    tap()
+    move(xy.homeButton)
  
