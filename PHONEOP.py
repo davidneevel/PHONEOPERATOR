@@ -2,7 +2,7 @@ import phone_commands as pc
 import look_for_hearts as lfh
 import look_for_follow_insta as instaFollowers
 import phone_coordinates as xy
-import random
+
 
 # pc.unlock()
 # print  "phone unlocked"
@@ -41,23 +41,6 @@ def insta_likes():
         pc.scrollUp()
         pc.getOutTheWay()
         lfh.lookForHearts()
-        b = random.randint(1,100)
-        print "random number = %d" % b
-        if b <= 20:
-            pc.x(1100)  # move over to the comment button
-            pc.type("nice")
-            pc.movexy(2800, 4300)  #post comment
-            tap()
-            pc.movexy(900, 6300)  # back to stream
-            tap()
-        if b > 20 and b <= 40:
-            pc.x(1100)  # move over to the comment button
-            pc.type('great pic')
-            pc.movexy(2800, 4300)  #post comment
-            tap()
-            pc.movexy(900, 6300)  #back to stream
-            tap()
-
         a += 1
 
     pc.homeButton()
@@ -65,9 +48,9 @@ def insta_likes():
     pc.onOff()
 
 
-# insta_likes()
+insta_likes()
 
-pc.type('great pic')
+# pc.type('great pic')
     
 
 

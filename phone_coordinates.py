@@ -6,7 +6,7 @@ homeButton = (1950,2250)
 
 servoUp = 65
 servoDown = 110
-servoDownLight = 105
+servoDownLight = 101
 servoDownSuperLight = 99
 
 #                     APP SCREEN
@@ -88,7 +88,7 @@ l = (2900, kbRow1)
 m = (2650, kbRow2)
 n = (2415, kbRow2)
 o = (2766, kbRow0)
-p = (3000, kbRow0)
+p = (2950, kbRow0)
 q = (900, kbRow0)
 r = (1600, kbRow0)
 s = (1237, kbRow2)

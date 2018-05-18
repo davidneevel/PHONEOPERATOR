@@ -20,7 +20,7 @@ Servo servo;
 Servo onOffServo;
 int servoUp = 65;
 int servoDown = 110;
-int servoDownLight = 105;
+int servoDownLight = 102;
 
 //Variables for first byte of array rec'd from raspi
 int moveYCmd = 1;

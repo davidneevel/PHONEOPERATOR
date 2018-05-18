@@ -5,6 +5,8 @@ import numpy
 import mapValues
 import phone_commands as pc
 
+import random
+
 from time import sleep
 
 def lookForHearts():
@@ -60,6 +62,28 @@ def lookForHearts():
             pc.movexy(900,toY)
             pc.lightTap()
             pc.checkStatus()
+            b = random.randint(1,100)
+
+            #tapped the heart, now decide whether to comment or not
+            print "random number = %d" % b
+            if b <= 20:
+                pc.x(1100)  # move over to the comment button
+                pc.tap()
+                pc.type("nice")
+                pc.movexy(2800, 4300)  #post comment
+                pc.tap()
+                sleep(2)
+                pc.movexy(900, 6300)  # back to stream
+                pc.tap()
+            if b > 20 and b <= 40:
+                pc.x(1100)  # move over to the comment button
+                pc.tap()
+                pc.type('great pic')
+                pc.movexy(2800, 4300)  #post comment
+                pc.tap()
+                sleep(2)
+                pc.movexy(900, 6300)  #back to stream
+                pc.tap()
             return(toY)
             
     
