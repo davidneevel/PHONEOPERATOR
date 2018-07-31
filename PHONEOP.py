@@ -48,8 +48,18 @@ def insta_likes():
     pc.onOff()
 
 
-insta_likes()
+def quit_apps():
+    pc.unlock()
+    pc.homeButton()  # includes tap command
+    pc.tap()
+    for x in range(0,3):
+        pc.scrollWayUp()
+    pc.homeButton()
+    pc.zero()
+    pc.onOff() 
 
+insta_likes()
+# quit_apps()
 # pc.type('great pic')
     
 

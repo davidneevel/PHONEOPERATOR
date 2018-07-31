@@ -63,6 +63,7 @@ def y(value):
     # print "c = %d" %c
     bus.write_i2c_block_data(ard1,moveY,[b,c,0,0])
     sleep(.01)
+    checkStatus()
     
 def x(value):
     checkStatus()   # is arduino busy?
@@ -110,13 +111,24 @@ def onOff():     # hits side power button once
 def scrollUp():
     checkStatus()
     move(xy.np0)
-    sleep(.25)
+    sleep(.05)
     servo(xy.servoDownSuperLight)
     sleep(.1)
     move(xy.np2)
     servo(xy.servoUp)
-    # move(xy.np0)
+    
     checkStatus()
+
+def scrollWayUp():
+    checkStatus()
+    move(xy.np0)
+    sleep(.05)
+    servo(xy.servoDownSuperLight)
+    y(6800)
+    servo(xy.servoUp)
+    checkStatus()
+
+
 
 def getOutTheWay():
     checkStatus()
