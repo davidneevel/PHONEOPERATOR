@@ -27,8 +27,8 @@ def followBack():
     image = cv2.imdecode(buff, 1)
 
     #crops in on image to search for hearts only in the left bit of the phone
-    roiX = 1050
-    roiXMax = 1280
+    roiX = 955
+    roiXMax = 1255
     roiY = 50
     roiYMax = 850
     roi = image[roiY:roiYMax,roiX:roiXMax] #  height range, width range (weird)
@@ -40,9 +40,13 @@ def followBack():
 
     #Convert to grayscale
     gray = cv2.cvtColor(roi,cv2.COLOR_BGR2GRAY)  # look for hearts within roi
+    bluramt = 4
+    blur = cv2.blur(gray,(bluramt,bluramt))
 
     #Look for faces in the image using the loaded cascade file
-    hearts = heart_cascade.detectMultiScale(roi,1.6,10, minSize=(100,100), maxSize=(160,160))  # previously looked at gray instead of cropped roi
+    hearts = heart_cascade.detectMultiScale(blur,1.3,4,minSize=(120,120),maxSize=(130,130))
+
+    # hearts = heart_cascade.detectMultiScale(roi,1.6,10, minSize=(100,100), maxSize=(160,160))  # previously looked at gray instead of cropped roi
     numHearts = len(hearts)
     print "Found "+str(numHearts)+" follow(s)"
     if numHearts > 0:
@@ -70,7 +74,7 @@ def followBack():
             print "avg_r_g = %r" % avg_r_g    # the average red and green values
             blue_ratio = avg_color[0] / avg_r_g
             print "blue_ratio = %r" % blue_ratio
-            if(blue_ratio > 1.15):
+            if(blue_ratio > 1):  # previously set to 1.15
                 print "gotta follow this guy"
                 cv2.line(image,(heartX,heartY),(heartX,heartY),(0,0,255),5)
             
@@ -90,12 +94,12 @@ def followBack():
 
 # # cv2.rectangle(image,(640,0), (750,camH),(0,255,0),3)  # this was used to outline roi
 
-        # #Save the result image
-        cv2.imwrite('result.jpg',image) # previously image
-        # Show the saved image
-        # cv2.imshow('result', roi) # previously image
-        # cv2.waitKey(0)
-        # cv2.destroyAllWindows()
+    # # #Save the result image
+    # cv2.imwrite('result.jpg',image) # previously image
+    # # Show the saved image
+    # cv2.imshow('result', roi) # previously image
+    # cv2.waitKey(0)
+    # cv2.destroyAllWindows()
 
 
 

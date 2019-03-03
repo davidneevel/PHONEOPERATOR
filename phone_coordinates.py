@@ -67,7 +67,7 @@ np9 = (npCol3, npRow3)
 
 kbRow0 = 3675 # top row
 kbRow1 = 3350
-kbRow2 = 3025
+kbRow2 = 2975
 kbRow3 = 2700 # bottom of phone
 
 space = (2100, kbRow3)
@@ -91,11 +91,11 @@ o = (2766, kbRow0)
 p = (2950, kbRow0)
 q = (900, kbRow0)
 r = (1600, kbRow0)
-s = (1237, kbRow2)
+s = (1237, kbRow1)
 t = (1833, kbRow0)
 u = (2300, kbRow0)
 v = (1949, kbRow2)
-w = (1300, kbRow0)
+w = (1100, kbRow0)
 x = (1483, kbRow2)
 y = (2066, kbRow0)
 z = (1250, kbRow2)
@@ -109,6 +109,6 @@ seven = u
 eight = l
 nine = o
 zero = p
-
+hashtag = (2975,2700)
 
 period = 0

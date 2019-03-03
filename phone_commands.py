@@ -1,5 +1,6 @@
 import smbus
 import phone_coordinates as xy
+from time import sleep
 
 bus = smbus.SMBus(1)
 
@@ -27,13 +28,13 @@ def checkStatus(): # checks and waits until not busy
         try:
             status = bus.read_byte(ard1)
             if status == 100:    # 100 means ready
-                print "ard1 ready"
+                # print "ard1 ready"
                 gettingStatus = 0
             else:
-                print "ard1 busy"
+                # print "ard1 busy"
                 sleep(.1)
         except:
-            print "ard1 is offline. trying again"
+            print "motors moving"
             sleep(.1)
 
 
@@ -43,7 +44,12 @@ def movexy(x,y):           # for x, y coordinates
     c = x - (b * 100)
     d = int(round(y/100))
     e = y - (d * 100)
-    bus.write_i2c_block_data(ard1,moveXY,[b,c,d,e])
+    try:
+        bus.write_i2c_block_data(ard1,moveXY,[b,c,d,e])
+    except:
+        sleep(.2)
+        bus.write_i2c_block_data(ard1,moveXY,[b,c,d,e])
+        
 
 def move(value):          # for predefined locations specified in phone_coordinates
     x = value[0]
@@ -53,7 +59,11 @@ def move(value):          # for predefined locations specified in phone_coordina
     c = x - (b * 100)
     d = int(round(y/100))
     e = y - (d * 100)
-    bus.write_i2c_block_data(ard1,moveXY,[b,c,d,e])
+    try: 
+        bus.write_i2c_block_data(ard1,moveXY,[b,c,d,e])
+    except:
+        sleep(.2)
+        bus.write_i2c_block_data(ard1,moveXY,[b,c,d,e])
     # sleep(.1)
 def y(value):
     checkStatus()
@@ -151,11 +161,11 @@ def unlock():
     tap()
     sleep(.35)
 
-    move(xy.np0)
-    tap()
-    move(xy.np5)
+    move(xy.np1)
     tap()
     move(xy.np2)
+    tap()
+    move(xy.np3)
     tap()
     move(xy.np4)
     tap()
@@ -166,6 +176,7 @@ def press(value):
     lightTap()
 
 def text_mike():
+    unlock()
     move(xy.app(0,6))
     lightTap()
     movexy(2200,5850)   # text field
@@ -174,6 +185,7 @@ def text_mike():
     press(xy.i)
     press(xy.k)
     press(xy.e)
+    zero()
     movexy(2200,5950)
     lightTap()
     movexy(2200, 3050)
@@ -219,6 +231,9 @@ def respond_to_text():
     press(xy.c)
     press(xy.e)
 
+
+
+
 def type(a):
     length = len(a)
     for i in range(0,length):
@@ -245,6 +260,21 @@ def type(a):
             move(xy.nine)
         elif letter == '0':
             move(xy.zero)
+        elif letter == '.':
+            move(xy.numbers)
+            lightTap()
+            move(xy.z)
+            lightTap()
+            move(xy.numbers)
+        elif letter == '@':
+            move(xy.numbers)
+            lightTap()
+            move(xy.k)
+            lightTap()
+            move(xy.numbers)
+        elif letter == '#':            
+            move(xy.hashtag)  # not always there! But it shows up in twit & insta keyboards
+
         
         else:
             varname = 'xy.' + letter
@@ -252,15 +282,18 @@ def type(a):
             move(target)
         lightTap()
 
-    
-def twitter():
+
+
+
+
+def send_tweet():
     move(xy.app(3,2))  # twitter app
     tap()
     move((3100,6500))   # new tweet button
     tap()
     sleep(1)
 
-    move(xy.c)
+    move(xy.h)
     lightTap()
     move(xy.h)
     lightTap()
@@ -343,10 +376,28 @@ def twitter():
     zero()
 
 
+def marktplaats():
+    unlock()
+    move(xy.app(1,5))
+    tap()
+    getOutTheWay()
+    sleep(5)
+    a = 0
+    while a < 7:
+        scrollUp()
+        getOutTheWay()
+        sleep(3)
+        a +=1 
 
+    homeButton()
+    zero()
+    sleep(1)
+    
+    onOff()
 
 def insta_selfie():
-
+    
+    unlock()
     move(xy.app(2,1))  # instagram app
     tap()
 
@@ -403,6 +454,61 @@ def insta_selfie():
     zero()
 
 
+def insta_photo():
+
+    move(xy.app(2,1))  # instagram app
+    tap()
+
+    movexy(1950,2700)  # make post button
+    tap()
+    sleep(5)
+
+
+    # movexy(1950, 3450) # take picture
+    # tap()
+    # sleep(1.5)
+
+    # movexy(2800, 6550)  # next button
+    # sleep(.25)
+    # tap()
+
+    # movexy(2100, 6100)  # enter text
+    # tap()
+    # sleep(1)
+
+    # move(xy.l) # L
+    # lightTap()
+    # sleep(.25)
+
+    # move(xy.o) # O
+    # lightTap()
+    # sleep(.25)
+
+    # move(xy.l) # L
+    # lightTap()
+    # sleep(.25)
+
+    # movexy(2800, 6450) # OK
+    # sleep(.25)
+    # slowTap()
+
+    # sleep(1)
+
+    # slowTap()  #  POST
+
+    # move(xy.homeButton) # home button
+    # sleep(5)
+
+    # tap()
+
+    # sleep(5)
+
+    # onOff()
+
+
+    # zero()
+
+
 def off():
     zero()
     onOff()
@@ -417,3 +523,7 @@ def open_insta_followers():
     tap()
     move(xy.homeButton)
  
+
+
+if __name__ == '__main__':
+    type("wow")

@@ -4,4 +4,15 @@ keys.pyc
 lib/
 include/
 local/
-venv/
+venv/*
+*.pyc
+._*
+*.mp4
+*.jpg
+dicts/*
+test.py
+z_old*
+img_search_modules*
+i2cArduino*
+old/*
+

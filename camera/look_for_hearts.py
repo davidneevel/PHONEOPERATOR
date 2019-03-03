@@ -44,8 +44,12 @@ if numHearts == 1:
     for (x,y,w,h) in hearts:
         heartX = roiX + x + w/2  # around the heart plus the distance from the edge to the roi
         heartY = y + h/2
-        cv2.rectangle(image,(x + roiX,y),(x+w + roiX,y+h),(255,0,0),2)
+        # cv2.rectangle(image,(x + roiX,y),(x+w + roiX,y+h),(255,0,0),2)
+        cv2.rectangle(image,(x + roiX,y + roiY),(x+w + roiX,y+h + roiY),(255,0,0),2)
         # draw a point at the center of the heart
+
+        cv2.rectangle(image,(640,300),(750,960),(0,255,0),1)
+        print 'roi box'
         
         cv2.line(image,(heartX,heartY),(heartX,heartY),(0,0,255),5)
         print "heartX, heartY = (%d, %d)" % (heartX, heartY) 
