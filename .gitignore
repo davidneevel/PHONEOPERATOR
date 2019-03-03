@@ -10,6 +10,7 @@ venv/*
 *.mp4
 *.jpg
 dicts/*
+.vscode*
 test.py
 z_old*
 img_search_modules*
