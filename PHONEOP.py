@@ -1,9 +1,10 @@
 import phone_commands as pc
-import look_for_hearts as lfh
+import look_for_hearts as lfh  #this is the instagram one
 import look_for_follow_insta as instaFollowers
 import phone_coordinates as xy
 import look_for_twit_heart as theart
 import look_for_fb_like as lffb
+import look_for_reddit_like as lfrl
 from time import sleep
 from random import randint
 
@@ -93,6 +94,23 @@ def insta_likes():  # Yo! lfh.lookForHearts has the commenting functionality bui
     sleep(1)
     pc.onOff()
 
+
+def reddit_upvote():
+    pc.unlock()
+    pc.move(xy.app(3,4))
+    pc.tap()
+    pc.getOutTheWay()
+    pc.sleep(2)
+    a = 0
+    while a < 15:
+        pc.scrollUp()
+        pc.getOutTheWay()
+        lfrl.lookForLikes()
+        a += 1
+    pc.homeButton()
+    pc.zero()
+    sleep(1)
+    pc.onOff()
 
 
 def fb_likes():
@@ -196,7 +214,7 @@ while 0:
 # pc.insta_selfie()
 # quit_apps()
 
-pc.marktplaats()
+# pc.marktplaats()
 
 # tweet("i will be on display next weekend in the hague at todaysart www.todaysart.nl")
 
@@ -209,7 +227,7 @@ pc.marktplaats()
 
 # quit_apps()
 
-    
+reddit_upvote()
 
 
 
